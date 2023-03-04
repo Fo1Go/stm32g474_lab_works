@@ -53,7 +53,7 @@ void victory() {
 	delay(100);
 	off();
 }
-`
+
 void lost() {
 	delay(300);
 	GPIOE -> ODR |= GPIO_ODR_OD7;
