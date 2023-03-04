@@ -1,10 +1,7 @@
 #include "stm32g474xx.h"
-#define true 1
-#define false 0
-
 
 int button_pressed_1 = 0;
-int victory_bool = false;
+int victory_bool = 0;
 
 int checkbutton() {
 	if((GPIOB->IDR & GPIO_IDR_ID15) == 0 && button_pressed_1 == 0) {

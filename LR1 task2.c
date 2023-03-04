@@ -1,11 +1,10 @@
 #include "stm32g474xx.h"
-#define true 1
-#define false 0
 
-// if my number is 10, i = 9, then button1 = 2 = PB13 and button2 = 4 = PB15; light1, light2 = PE11, PD11
 
-void delay(uint32_t);
-
+void delay(uint32_t time_delay) {
+    uint32_t i;
+    for(i = 0; i < time_delay; i++);
+}
 
 int main(void) {
 	uint32_t button_is_pressed = 0;
@@ -44,8 +43,3 @@ int main(void) {
 	}
 }
 
-
-void delay(uint32_t time_delay) {
-    uint32_t i;
-    for(i = 0; i < time_delay; i++);
-}

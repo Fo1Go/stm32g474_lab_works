@@ -1,9 +1,4 @@
 #include "stm32g474xx.h"
-#define true 1
-#define false 0
-
-// if my number is 10, i = 9, button = 3 pb14, button 1 pb12
-
 
 int main(void) {
 
