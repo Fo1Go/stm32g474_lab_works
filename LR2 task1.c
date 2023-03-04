@@ -1,0 +1,29 @@
+#include "stm32g474xx.h"
+
+int light_on = 0;
+
+void EXTI15_10_IRQHandler() {
+	light_on = !light_on;
+	EXTI -> PR1 = EXTI_PR1_PIF12;
+}
+
+int main(void) {
+	RCC -> AHB2ENR |= RCC_AHB2ENR_GPIOEEN | RCC_AHB2ENR_GPIOBEN | RCC_AHB2ENR_GPIODEN;
+	RCC -> APB2ENR |= RCC_APB2ENR_SYSCFGEN;
+
+	SYSCFG->EXTICR[3] |= SYSCFG_EXTICR4_EXTI12_PB;
+	EXTI -> IMR1 |= EXTI_IMR1_IM12;
+	EXTI -> RTSR1 |= EXTI_RTSR1_RT12;
+	EXTI -> FTSR1 |= EXTI_FTSR1_FT13;
+	NVIC_EnableIRQ(EXTI15_10_IRQn);
+
+	GPIOE -> MODER &= ~GPIO_MODER_MODE7_Msk; GPIOE -> MODER |= 1 << GPIO_MODER_MODE7_Pos;
+	GPIOB -> MODER &= ~GPIO_MODER_MODE12_Msk; GPIOB -> MODER |= 0 << GPIO_MODER_MODE12_Pos;
+
+	while(1) {
+		if(light_on)
+			GPIOE -> ODR |= GPIO_ODR_OD7;
+		else
+			GPIOE -> ODR &= ~GPIO_ODR_OD7;
+	}
+}
