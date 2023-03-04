@@ -23,17 +23,17 @@ void victory() {
 		return;
 	}
 	delay(100);
-	GPIOE -> ODR ^= GPIO_ODR_OD12;
-	GPIOE -> ODR ^= GPIO_ODR_OD13;
+	GPIOE -> ODR |= GPIO_ODR_OD12;
+	GPIOE -> ODR |= GPIO_ODR_OD13;
 	delay(100);
-	GPIOE -> ODR ^= GPIO_ODR_OD14;
-	GPIOE -> ODR ^= GPIO_ODR_OD15;
+	GPIOE -> ODR |= GPIO_ODR_OD14;
+	GPIOE -> ODR |= GPIO_ODR_OD15;
 	delay(200);
-	GPIOE -> ODR ^= GPIO_ODR_OD15;
-	GPIOE -> ODR ^= GPIO_ODR_OD14;
+	GPIOE -> ODR &= ~GPIO_ODR_OD15;
+	GPIOE -> ODR &= ~GPIO_ODR_OD14;
 	delay(100);
-	GPIOE -> ODR ^= GPIO_ODR_OD13;
-	GPIOE -> ODR ^= GPIO_ODR_OD12;
+	GPIOE -> ODR &= ~GPIO_ODR_OD13;
+	GPIOE -> ODR &= ~GPIO_ODR_OD12;
 
 }
 
@@ -42,18 +42,18 @@ void lose() {
 		return;
 	}
 	delay(300);
-	GPIOE -> ODR ^= GPIO_ODR_OD15;
-	GPIOE -> ODR ^= GPIO_ODR_OD14;
-	GPIOE -> ODR ^= GPIO_ODR_OD13;
-	GPIOE -> ODR ^= GPIO_ODR_OD12;
+	GPIOE -> ODR |= GPIO_ODR_OD15;
+	GPIOE -> ODR |= GPIO_ODR_OD14;
+	GPIOE -> ODR |= GPIO_ODR_OD13;
+	GPIOE -> ODR |= GPIO_ODR_OD12;
 	delay(100);
-	GPIOE -> ODR ^= GPIO_ODR_OD12;
+	GPIOE -> ODR &= ~GPIO_ODR_OD12;
 	delay(80);
-	GPIOE -> ODR ^= GPIO_ODR_OD13;
+	GPIOE -> ODR &= ~GPIO_ODR_OD13;
 	delay(80);
-	GPIOE -> ODR ^= GPIO_ODR_OD14;
+	GPIOE -> ODR &= ~GPIO_ODR_OD14;
 	delay(80);
-	GPIOE -> ODR ^= GPIO_ODR_OD15;
+	GPIOE -> ODR &= ~GPIO_ODR_OD15;
 }
 
 int main(void) {
@@ -74,7 +74,7 @@ int main(void) {
 	GPIOB->MODER |= 0 << GPIO_MODER_MODE15_Pos;
 
 
-	while(true) {
+	while(1) {
 		if(victory_bool) {
 			victory();
 		} else {

@@ -39,13 +39,13 @@ int main(void) {
 			button_pressed_2 = 1;
 			numberdiod = 0;
 			if(GPIO_ODR_OD7)
-				GPIOE -> ODR &= GPIO_ODR_OD7;
+				GPIOE -> ODR &= ~GPIO_ODR_OD7;
 			if(GPIO_ODR_OD8)
-				GPIOE -> ODR &= GPIO_ODR_OD8;
+				GPIOE -> ODR &= ~GPIO_ODR_OD8;
 			if(GPIO_ODR_OD9)
-				GPIOE -> ODR &= GPIO_ODR_OD9;
+				GPIOE -> ODR &= ~GPIO_ODR_OD9;
 			if(GPIO_ODR_OD10)
-				GPIOE -> ODR &= GPIO_ODR_OD10;
+				GPIOE -> ODR &= ~GPIO_ODR_OD10;
 		}
 		else if (GPIOB->IDR & GPIO_IDR_ID12) {
 			button_pressed_2 = 0;
@@ -53,16 +53,16 @@ int main(void) {
 
 
 		if(numberdiod >= 1){
-			GPIOE -> ODR ^= GPIO_ODR_OD7;
+			GPIOE -> ODR |= GPIO_ODR_OD7;
 		}
 		if(numberdiod >= 2){
-			GPIOE -> ODR ^= GPIO_ODR_OD8;
+			GPIOE -> ODR |= GPIO_ODR_OD8;
 		}
 		if(numberdiod >= 3){
-			GPIOE -> ODR ^= GPIO_ODR_OD9;
+			GPIOE -> ODR |= GPIO_ODR_OD9;
 		}
 		if(numberdiod >= 4){
-			GPIOE -> ODR ^= GPIO_ODR_OD10;
+			GPIOE -> ODR |= GPIO_ODR_OD10;
 		}
 	}
 }
